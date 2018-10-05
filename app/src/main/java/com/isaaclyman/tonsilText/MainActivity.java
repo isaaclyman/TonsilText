@@ -1,6 +1,5 @@
 package com.isaaclyman.tonsilText;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
@@ -25,7 +24,7 @@ public class MainActivity extends Activity {
 
     private InputMethodManager imm;
     private EditText editMessage;
-    private OptimizingTextView viewMessage;
+    private TextView viewMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +33,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         // Get elements
-        editMessage = (EditText) findViewById(R.id.edit_message);
-        viewMessage = (OptimizingTextView) findViewById(R.id.view_message);
-        imm = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
+        editMessage = findViewById(R.id.edit_message);
+        viewMessage = findViewById(R.id.view_message);
+        imm = (InputMethodManager) this.getSystemService(Service.INPUT_METHOD_SERVICE);
 
         // When the user finishes editing text, submit it
         editMessage.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -50,13 +49,13 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Wait for the TextView to be drawn, then get its height
+        // Dirty fix for TextView hint on initial creation
         ViewTreeObserver vto = viewMessage.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
             @Override
             public void onGlobalLayout() {
-                viewMessage.setDefaultState(viewMessage.getHeight());
+                viewMessage.setText(editMessage.getText());
 
                 ViewTreeObserver obs = viewMessage.getViewTreeObserver();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -79,9 +78,6 @@ public class MainActivity extends Activity {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        // Reduce the calculated height of the TextView object by the size of the action bar
-        ActionBar actionBar = getActionBar();
-        viewMessage.height -= Math.round(actionBar.getHeight() * 1.2f);
         return super.onCreateOptionsMenu(menu);
     }
 
