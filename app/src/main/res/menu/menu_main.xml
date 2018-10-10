@@ -1,19 +1,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
 
-    <item android:id="@+id/user_settings"
-        android:title="@string/user_settings"
+    <item
+        android:id="@+id/user_settings"
         android:icon="@drawable/ic_action_settings"
-        android:showAsAction="ifRoom"/>
+        android:iconTint="@android:color/white"
+        android:title="@string/user_settings"
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/quick_strings"
-        android:title="@string/quick_strings"
+    <item
+        android:id="@+id/quick_strings"
         android:icon="@drawable/ic_action_paste"
-        android:showAsAction="ifRoom"/>
+        android:iconTint="@android:color/white"
+        android:title="@string/quick_strings"
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/edit_button"
-        android:title="@string/edit_button"
+    <item
+        android:id="@+id/edit_button"
         android:icon="@drawable/ic_action_edit"
-        android:showAsAction="always"/>
+        android:iconTint="@android:color/white"
+        android:title="@string/edit_button"
+        app:showAsAction="always" />
 
 </menu>
